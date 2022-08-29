@@ -1,6 +1,39 @@
 var rows = [];
 var CurWord = [];
-var WinningWord = ['o', 'u', 't', 'e', 'r'];
+
+const WORDS = ['which',
+'there',
+'their',
+'about',
+'would',
+'these',
+'other',
+'words',
+'could',
+'write',
+'first',
+'water',
+'after',
+'where',
+'right',
+'think',
+'three',
+'years',
+'place',
+'sound',
+'great',
+'again',
+'still',
+'every',
+'small',
+'found',
+'those',
+'never',
+'under',]
+var toUse = WORDS[Math.floor(Math.random() * WORDS.length)];
+toUse = toUse.toLowerCase();
+var WinningWord = toUse.split("");
+console.log(WinningWord);
 var done = document.getElementById("Done");
 gameover = false;
 for (var i = 0; i < 6; i++){
@@ -30,6 +63,7 @@ function check (key) {
         done.innerHTML = 'Please Enter 5 Letter Word';
         return;
     }
+    
     var row = rows[curRow];
     for (var i = 0; i < 5; i++){
         if(curMap[WinningWord[i]]){
@@ -79,7 +113,7 @@ function check (key) {
     }
 
     else if(curRow > 5){
-        done.innerHTML = 'Correct word was ' + WinningWord.join("");
+        done.innerHTML = 'Game Over, The word was \'' + WinningWord.join("") + '\'';
         gameover = true;
     }
 
@@ -125,3 +159,28 @@ document.addEventListener("keyup", (e) => {
     }
     }
 })
+
+
+document.getElementById('replay').addEventListener('click', replay);
+
+function replay() {
+
+    curCol = 0;
+    curRow = 0;
+    toUse = WORDS[Math.floor(Math.random() * WORDS.length)];
+    toUse = toUse.toLowerCase();
+    CurWord = [];
+    WinningWord = toUse.split("");
+    console.log(WinningWord);
+    done.innerHTML = '';
+    gameover = false;
+
+    for (var i = 0; i < 6; i++){
+        for (var j = 0; j < 5; j++){
+            rows[i][j].innerHTML = "";
+            rows[i][j].style.backgroundColor = "#66A5AD";
+        }
+    }
+
+}
+
